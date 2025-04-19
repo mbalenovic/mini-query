@@ -1,6 +1,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+// @ts-ignore
+import { MiniQueryClient, MiniQueryClientProvider } from "../../miniQuery.jsx";
 
 const queryClient = new QueryClient();
+
+const miniQueryClient = new MiniQueryClient();
 
 export function getContext() {
 	return {
@@ -10,6 +14,10 @@ export function getContext() {
 
 export function Provider({ children }: { children: React.ReactNode }) {
 	return (
-		<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+		<QueryClientProvider client={queryClient}>
+			<MiniQueryClientProvider queryClient={miniQueryClient}>
+				{children}
+			</MiniQueryClientProvider>
+		</QueryClientProvider>
 	);
 }
