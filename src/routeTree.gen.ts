@@ -13,6 +13,8 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as DemoTanstackQueryImport } from './routes/demo.tanstack-query'
+import { Route as DemoMiniQueryPostsIndexImport } from './routes/demo.mini-query.posts.index'
+import { Route as DemoMiniQueryPostsPostPostIdImport } from './routes/demo.mini-query.posts.post.$postId'
 
 // Create/Update Routes
 
@@ -27,6 +29,19 @@ const DemoTanstackQueryRoute = DemoTanstackQueryImport.update({
   path: '/demo/tanstack-query',
   getParentRoute: () => rootRoute,
 } as any)
+
+const DemoMiniQueryPostsIndexRoute = DemoMiniQueryPostsIndexImport.update({
+  id: '/demo/mini-query/posts/',
+  path: '/demo/mini-query/posts/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DemoMiniQueryPostsPostPostIdRoute =
+  DemoMiniQueryPostsPostPostIdImport.update({
+    id: '/demo/mini-query/posts/post/$postId',
+    path: '/demo/mini-query/posts/post/$postId',
+    getParentRoute: () => rootRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -46,6 +61,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTanstackQueryImport
       parentRoute: typeof rootRoute
     }
+    '/demo/mini-query/posts/': {
+      id: '/demo/mini-query/posts/'
+      path: '/demo/mini-query/posts'
+      fullPath: '/demo/mini-query/posts'
+      preLoaderRoute: typeof DemoMiniQueryPostsIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/demo/mini-query/posts/post/$postId': {
+      id: '/demo/mini-query/posts/post/$postId'
+      path: '/demo/mini-query/posts/post/$postId'
+      fullPath: '/demo/mini-query/posts/post/$postId'
+      preLoaderRoute: typeof DemoMiniQueryPostsPostPostIdImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -54,36 +83,59 @@ declare module '@tanstack/react-router' {
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/demo/mini-query/posts': typeof DemoMiniQueryPostsIndexRoute
+  '/demo/mini-query/posts/post/$postId': typeof DemoMiniQueryPostsPostPostIdRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/demo/mini-query/posts': typeof DemoMiniQueryPostsIndexRoute
+  '/demo/mini-query/posts/post/$postId': typeof DemoMiniQueryPostsPostPostIdRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/demo/mini-query/posts/': typeof DemoMiniQueryPostsIndexRoute
+  '/demo/mini-query/posts/post/$postId': typeof DemoMiniQueryPostsPostPostIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo/tanstack-query'
+  fullPaths:
+    | '/'
+    | '/demo/tanstack-query'
+    | '/demo/mini-query/posts'
+    | '/demo/mini-query/posts/post/$postId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo/tanstack-query'
-  id: '__root__' | '/' | '/demo/tanstack-query'
+  to:
+    | '/'
+    | '/demo/tanstack-query'
+    | '/demo/mini-query/posts'
+    | '/demo/mini-query/posts/post/$postId'
+  id:
+    | '__root__'
+    | '/'
+    | '/demo/tanstack-query'
+    | '/demo/mini-query/posts/'
+    | '/demo/mini-query/posts/post/$postId'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
+  DemoMiniQueryPostsIndexRoute: typeof DemoMiniQueryPostsIndexRoute
+  DemoMiniQueryPostsPostPostIdRoute: typeof DemoMiniQueryPostsPostPostIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
+  DemoMiniQueryPostsIndexRoute: DemoMiniQueryPostsIndexRoute,
+  DemoMiniQueryPostsPostPostIdRoute: DemoMiniQueryPostsPostPostIdRoute,
 }
 
 export const routeTree = rootRoute
@@ -97,7 +149,9 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/demo/tanstack-query"
+        "/demo/tanstack-query",
+        "/demo/mini-query/posts/",
+        "/demo/mini-query/posts/post/$postId"
       ]
     },
     "/": {
@@ -105,6 +159,12 @@ export const routeTree = rootRoute
     },
     "/demo/tanstack-query": {
       "filePath": "demo.tanstack-query.tsx"
+    },
+    "/demo/mini-query/posts/": {
+      "filePath": "demo.mini-query.posts.index.tsx"
+    },
+    "/demo/mini-query/posts/post/$postId": {
+      "filePath": "demo.mini-query.posts.post.$postId.tsx"
     }
   }
 }

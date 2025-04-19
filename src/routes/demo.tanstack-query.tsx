@@ -5,7 +5,7 @@ export const Route = createFileRoute("/demo/tanstack-query")({
 	component: TanStackQueryDemo,
 });
 
-function TanStackQueryDemo() {
+export function TanStackQueryDemo() {
 	const { data } = useQuery({
 		queryKey: ["people"],
 		queryFn: () =>
