@@ -1,0 +1,15 @@
+{
+  "framework": "react",
+  "typescript": true,
+  "projectName": "mini-query",
+  "mode": "file-router",
+  "tailwind": true,
+  "packageManager": "yarn",
+  "toolchain": "biome",
+  "variableValues": {},
+  "git": true,
+  "version": 1,
+  "existingAddOns": [
+    "tanstack-query"
+  ]
+}
